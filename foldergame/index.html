@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Game</title>
+    <script>
+        var started = false;
+        var sequence = "";
+        var index= 0;
+        var score = 0;
+        const btn = document.querySelector("div button");
+        animate('l');
+
+        function add(x) {
+            if (started) { //checks if the game is ongoin
+                btn.disabled = true; //disable inputs
+                
+               if (sequence.charAt(index) == x)
+               {
+                   index++; //next char in scanning
+                   animate(x);
+                   if (index == sequence.length)
+                    {
+                        score++;
+                        document.querySelector("span").innerHTML(score); //update score
+                        index = 0;
+                        playSequence();
+                    }
+
+
+               } else {
+                   //lost
+                   //animate loss
+                   animate('l');
+                   started = false;
+               }
+     
+            }
+        }
+
+        function startGame() {
+            //
+            started = true;
+            sequence = "";
+            index = 0;
+            btn.disabled = true;//disable buttons
+
+            playSequence();
+            
+        }
+        
+
+        function playSequence() {
+            for (var i=0;i<sequence.length;i++)
+            {
+                animate(sequence.charAt(i));
+                //sleep 1 second
+            }
+
+            //add random
+            var rand = 'x';
+
+            switch(Math.floor(Math.random()*4)) {
+                case 0:
+                    rand = 'r';
+                    break;
+                case 1:
+                    rand = 'g';
+                    break;
+                case 2:
+                    rand = 'b';
+                    break;
+                case 3:
+                    rand = 'y';
+                    break;
+            }
+            sequence += rand;
+            animate(rand);
+            btn.disabled = false; //enable inputs
+
+        }
+
+        function animate(x) {
+
+            switch(x) {
+                case 'r':
+                    
+                    break;
+                case 'g':
+                    
+                    break;
+                case 'b':
+                    
+                    break;
+                case 'y':
+                    
+                    break;
+                default:
+                    //loss make it purple
+            }
+        }
+        
+
+    </script>
+    <style>
+       * {
+            margin: 0px;
+            padding: 0px;
+            text-align: center;
+            color: white;
+            
+        }
+        html {
+            background-color: #222222; 
+        }
+
+        header {
+            height: 25vh;
+            background-color: #333333;
+            margin-top: 5vh;
+        }
+        
+        nav button {
+            font-weight: bold;
+            font-size: 24pt;
+            height: 10vh;
+            width: 10vw;
+            margin: 7.5vh 0;
+            background-color: #8175FF;
+            border: none;
+            border-radius: 5vh;
+            
+        }
+        div {
+            background-color: #222222; 
+            height: 70vh;
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-content: center;
+            align-content: center;
+            grid-gap: 2vh;
+        }
+
+        div button {
+            width: 40vw;
+            height: 30vh;
+            border: none;
+        }
+
+        button:hover {
+            filter: brightness(0.75);
+        }
+
+        #red {
+            background-color: #CC66B8;
+            border-top-right-radius: 200px;
+        }
+
+        #yellow {
+            background-color: #CCC766;
+            border-bottom-left-radius: 200px;
+        }
+
+        #green {
+            background-color: #66CC68;
+            border-top-left-radius: 200px;
+        }
+
+        #blue {
+            background-color: #66A8CC;
+            border-bottom-right-radius: 200px;
+        }
+
+        #alignment {
+            position: absolute;
+            height: 20vh;
+            width: 20vw;
+            background-color: #222222;
+            top: 55%;
+            right: 40%;
+            border-radius: 200px;
+            box-sizing: border-box;
+            color: white;
+            font-size: 40pt;
+            vertical-align: middle;
+
+
+        }
+
+        span {
+            vertical-align: middle;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+           <button onclick="startGame()">START</button>
+        </nav>
+    </header>
+    <div>
+        <button id="green" onclick="add('g')"></button>
+        <button id="red" onclick="add('r')"></button>
+        <button id="yellow" onclick="add('y')"></button>
+        <button id="blue" onclick="add('b')"></button>
+        <p id="alignment"><span>0</span></p>
+    </div>
+</body>
+</html>
