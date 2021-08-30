@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souza</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="media/Fonts/fontsheet.css" />
+    <script>
+        function send() {            
+            event.preventDefault();
+            alert("Message sent successfully.");
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="media\Images/logo.png" />
+            <ul>
+                <li class="selected"><a href="index.html" >HOME</a></li>
+                <li><a href="">ABOUT ME</a></li>
+                <li><a href="">PORTFOLIO</a></li>
+                <li><a href="">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div id="slideshow">
+            <img src="media/Images/left.png" class="arrows" />
+            <h1>Hi! I'm Pedro Souza, and I create amazing websites and mobile apps.</h1>
+            <img src="media/Images/right.png" class="arrows" />
+        </div>
+        <button id="meetportfolio">MEET MY PORTFOLIO</button>
+        
+    </header>
+
+
+
+    
+  
+
+    <div id="aboutme">
+        
+
+        <section id="abouttext">
+            <h1 id="aboutheader">ABOUT ME</h1>
+            <hr>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </section>
+        <section id="imggrid">
+
+            <img src="media\Images/flag.png"/>
+            <img src="media\Images/pencil.png"/>
+            <img src="media\Images/gear.png"/>
+            <h2>BRANDING</h2>
+            <h2>DESIGN</h2>
+            <h2>DEVELOPMENT</h2>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.</p>
+            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem</p>
+            <p>Until summer, accusamus et iusto odio dignissimos qui blanditiis praesentium.</p>
+        </section>
+    </div>
+    
+     
+    <div id="portfolio">
+        <section id="portext">
+            <h1>PORTFOLIO</h1>
+            <hr>
+            <p>Neque porro quisquam est, qui dolorem ipsum quiavvv dolor sit amet consectetur, adipisci velit, sed quia non numquam</p>
+        </section>
+
+
+        <div id="fourbyfour">
+          <section>
+              <img src="media\Images/portfolio-01.png" />
+              <p>ISOMETRIC PERSPECTIVE MOCK-UP</p>
+         </section>  
+         <section>
+              <img src="media\Images/portfolio-02.png" />
+              <p>TIME ZONE APP UI</p>
+         </section>  
+         <section>
+            <img src="media\Images/portfolio-03.png" />
+            <p>MEDIA PLAYERS UI</p>
+         </section>
+         <section>
+            <img src="media\Images/portfolio-04.png"/>
+            <p>BLOG / MAGAZINE FLAT UI KIT</p>
+         </section>   
+        </div>
+        <button>VIEW MORE</button>
+
+
+    </div>
+
+
+    <div id="getintouch">
+        <section id="getintouchtop">
+            <h1>GET IN TOUCH</h1>
+            <hr>
+            <p>Neque porro quisquam est, qui dolorem ipsum quiavvv dolor sit amet consectetur, adipisci velit, sed quia non numquam</p>
+        </section>
+
+        <section>
+            <form action="#">
+                <div id="textfields">
+                    <input name="name" type="text" required="required" placeholder="Name*" />
+                    <input name="email" type="email" required="required" placeholder="E-mail*" />
+                    <textarea name="message" rows="4" cols="50" placeholder="Message*" required="required"></textarea>
+                </div>
+                <input type="submit" value="SEND MESSAGE" onclick="send()" />
+            </form>
+        </section>
+    </div>
+    <footer>
+        <ul>
+            <li><a href="">Facebook</a></li>
+            <li><a href="">Twitter</a></li>
+            <li><a href="">Youtube</a></li>
+
+        </ul>
+    </footer>
+    
+    
+</body>
+</html>

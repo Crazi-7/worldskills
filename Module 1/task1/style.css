@@ -1,0 +1,363 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    overflow: none;
+    text-align: center;
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: Poppins-Bold;
+   src: url(media/Fonts/Poppins/Poppins-Bold.ttf); 
+}
+
+@font-face {
+    font-family: Poppins;
+   src: url(media/Fonts/Poppins/Poppins-Regular.ttf); 
+}
+
+header {
+    height: 595px;
+    background-image: url(media/Images/banner.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Poppins-Bold;
+    display: flex;    
+    align-items: center;
+    flex-direction: column;
+}
+
+
+ul {
+    list-style-type: none;
+    font-family: Poppins;
+}
+
+li {
+    display: inline-block;
+    padding: 10px;
+    margin: 0px 20px;
+    
+}
+
+.selected {
+    font-weight: bold;
+    background-color: #9053af;
+    border-radius: 5px;
+    font-family: Poppins-Bold;
+    
+}
+
+
+a {
+    text-decoration: none; 
+}
+
+header li:hover {
+    background-color: #5e3672;
+    color: #b5b5b5;
+    border-radius: 5px;
+}
+
+nav {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    column-gap: 40vw;
+    align-items: center;
+    margin-left: 30px;
+    width:1640px
+}
+
+.icontext {
+    width: 150px;
+    
+}
+
+
+
+
+#slideshow {
+    display: flex;
+    flex-flow: row nowrap;    
+    align-items: center;  
+
+    margin-top: 130px;      
+}
+
+#slideshow h1 {
+    width: 1000px;
+    margin: 0px 110px;
+}
+
+#meetportfolio {
+    margin-top: 50px;
+    background-color: #eb7d4b;
+    border: none;
+    border-radius: 5px;
+    height: 70px;
+    width: 331px;
+    font-family: Poppins-Bold;
+    font-size: 25px;
+}
+
+#meetportfolio:hover {
+    background-color: #a35734;
+    color: #b5b5b5;
+    cursor: pointer;
+}
+.arrows:hover {
+    filter:brightness(70%);
+}
+
+
+
+
+
+hr {
+    width: 90px;
+    margin: auto;
+}
+
+
+
+
+
+
+
+#aboutme {
+  
+    font-family: "Myriad Pro";
+    background-color: #17c2a4;
+    height: 750px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#imggrid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 100px;
+    grid-row-gap: 35px;
+    justify-content: center;
+    
+}
+
+#imggrid > *:not(img, section) {
+    width: 200px;
+}
+#imggrid > img {
+    
+    margin: auto;
+}
+
+#abouttext {
+    
+    width: 600px;
+    margin-bottom: 82px;
+}
+
+#aboutheader {
+    font-size: 40pt;
+    font-weight: bold;
+    margin-top: 109px;
+    
+}
+
+
+#abouttext > hr {
+    margin: 30px auto;
+    border-color: #14a58c;
+    border-style: solid;
+    border-width: 2px;
+}
+
+
+
+
+
+
+
+#portfolio {
+    background-color: #ffdd99;
+    font-family: Poppins;
+    height: 1423px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    
+ 
+}
+
+#portfolio * {
+    color: #000000;
+    font-family: Poppins;
+}
+
+#portext {
+    width: 655px;
+    margin-top: 119px;
+    margin-bottom: 142px;
+}
+
+#portext h1 {
+    font-size: 40px;
+    font-family: Poppins-Bold;
+}
+
+#portext hr {
+    border-color: #e5c37f;
+    border-style: solid;
+    border-width: 2px;
+    margin: 20px auto;
+}
+
+#portext p {
+
+}
+
+#fourbyfour {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    grid-column-gap: 10px;
+    grid-row-gap: 66px;
+}
+
+#fourbyfour p {
+    margin-top: 32px;
+}
+
+
+#portfolio button {
+    width: 206px;
+    height: 70px;
+    border: none;
+    border-radius: 5px;
+    background-color: #17c2a4;
+    color: #ffffff;
+    font-family: Poppins-Bold;
+    font-size: 18px;
+    margin-top: 60px;
+
+}
+
+#portfolio button:hover {
+    color: #b5b5b5;
+    background-color: #11816d;
+}
+
+
+
+
+
+#getintouch {
+    background-image: url(media/Images/get-in-touch.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: Poppins;
+    height: 819px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 50px;
+    /*justify-content: center; */
+
+}
+#getintouchtop h1 {
+    margin-top: 119px;
+    font-family: Poppins-Bold;
+    font-size: 40px;
+}
+
+#getintouchtop hr {
+    margin-top: 10px;
+    margin-bottom: 22px;
+}
+
+#getintouchtop {
+    width: 700px;
+    font-size: 18px;
+}
+
+input, textarea {
+    background-color: #273a71;
+    border: none;
+    border-radius: 5px;
+    font-family: Poppins;
+    font-size: 18px;
+}
+
+::placeholder {
+    color: #ffff;
+    font-family: Poppins;
+    font-size: 18px;
+}
+
+input[type="text"], input[type="email"] {
+    height: 56px;
+    width: 414px;
+    text-align: start;
+    padding: 25px;
+}
+
+input[type=submit] {
+    background-color: #30bae7;
+    height: 70px;
+    width: 293px;
+    border-radius: 5px;
+    margin-top: 59px;
+}
+
+#textfields {
+    display:grid;
+    grid-template-columns: auto auto;
+    grid-row-gap: 27px;
+    grid-column-gap: 32px;
+    justify-content: center;
+    
+}
+
+textarea {
+    width: 860px;
+    height: 200px;
+    grid-column: 1 / span 2;
+    text-align: start;
+    padding: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+footer {
+    background-color: #344b8e;
+    height: 112px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 55px;
+    font-family: "Myriad Pro";
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+

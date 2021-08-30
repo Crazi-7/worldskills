@@ -1,0 +1,46 @@
+# MENU
+HOME
+ON
+PORTFOLIO
+CONTACT
+
+# SLIDER
+Hi! I'm Pedro Souza, and I create amazing websites and mobile apps.
+
+MEET MY PORTFOLIO.
+
+# ABOUT ME
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+BRANDING
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh.
+
+DESIGN
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+
+DEVELOPMENT
+Until summer, accusamus et iusto odio dignissimos qui blanditiis praesentium.
+
+# PORTFOLIO
+Neque porro quisquam est, qui dolorem ipsum quiavvv dolor sit amet consectetur, adipisci velit, sed quia non numquam
+
+ISOMETRIC PERSPECTIVE MOCK-UP
+TIME ZONE APP UI
+MEDIA PLAYERS UI
+BLOG / MAGAZINE FLAT UI KIT
+
+VIEW MORE
+
+# GET IN TOUCH
+Neque porro quisquam est, qui dolorem ipsum quiavvv dolor sit amet consectetur, adipisci velit, sed quia non numquam
+
+Name
+Email
+Message
+
+SEND MESSAGE
+
+# BASEBOARD
+Facebook
+Twitter
+YouTube
