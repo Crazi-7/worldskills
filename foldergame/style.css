@@ -9,16 +9,16 @@ html {
     background-color: #222222; 
 }
 
-#upper {
-    /* position:fixed; */
-}
+/* #upper {
+    position:fixed; 
+} */
 header {
     height: 25vh;
     background-color: #333333;
     margin-top: 5vh;
 }
 
-nav button, input {
+nav button, input, thead {
     font-weight: bold;
     font-size: 24pt;
     height: 10vh;
@@ -108,5 +108,30 @@ span {
 }
 
 #lower {
-    height: 50vh;
+    height: 70vh;
+    width: 60vw;
+    margin: auto;
+    background-color: #333333;
+    border-radius: 2vw;
+}
+
+table {
+    font-weight: bold;
+    font-size: 24pt;
+    height: 60vh;
+    width: 60vw;
+    margin: auto; 
+    border: none;
+    border-spacing: 5vh;
+    font-family: sans-serif;
+    
+}
+
+ td {
+    border-radius: 10vw;
+    height: 10vh;
+}
+
+tbody {
+    background-color: #444444;
 }

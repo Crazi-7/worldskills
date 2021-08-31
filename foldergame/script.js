@@ -5,6 +5,20 @@ var index= 0;
 var score = 0;
 var valin = "";
 const btn = document.querySelectorAll(".gamebutton");
+var ranking = [ 
+    {
+        name: "",
+        score: 0,
+    }, 
+    {
+        name: "",
+        score: 0,
+    },
+    {
+        name: "",
+        score: 0,
+    }
+];
 animate('l');
 
 function add(x) {
@@ -146,6 +160,7 @@ function animate(x) {
                 element.classList.add('gameover');
                 audio.src = "sounds/lose.wav";
             }); 
+            pushScore();
             break;  
       //loss make it purple
     }
@@ -155,45 +170,46 @@ function animate(x) {
 }
 
 function loadRanks() {
-    let ranking = [ 
-        {
-            name: "",
-            score: 0,
-        }, 
-        {
-            name: "",
-            score: 0,
-        },
-        {
-            name: "",
-            score: 0,
-        }
-    ];
+    
 
     if (localStorage.getItem('rankings')) {
         ranking = localStorage.getItem('rankings');
+        ranking = JSON.parse(ranking);
     } 
+
     let table = document.getElementsByClassName("tablebody");
-    for (var i=0;i<3;i++) {
-        table[i].innerHTML = '<td>' + i+1 + '</td>';
-        table[i].innerHTML = '<td>' + ranking[i].name + '</td>';
-        table[i].innerHTML = '<td>' + ranking[i].score + '</td>';
-        
+    
+    for (var i = 0; i < 3; i++) {
+        table[i].innerHTML = `<td>${i+1}</td>` + '<td>' + ranking[i].name + '</td>' + '<td>' + ranking[i].score + '</td>';
+   
     }
 }
 
 
 function pushScore() {
-    let user;
-    let score;
-    ranking.push([user, score]);
-    ranking.sort((a, b) => {return b.score - a.score});
-    ranking.pop();
-    console.log(ranking);
+    if (score != 0)
+    {
+        if (valin.length === 0)
+            valin = "Anonymous";
 
-    // parse ranking to JSON
-    console.log(JSON.stringify(ranking));
-    localStorage.setItem('rankings', ranking);
+        console.log("valin");
+        
+        let playScore = {
+            name: valin, 
+            score: score
+        };
 
-    loadRanks();
+        ranking.push(playScore);
+        ranking.sort((a, b) => {return b.score - a.score});
+        ranking.pop();
+        console.log(ranking);
+
+        // parse ranking to JSON
+        console.log(JSON.stringify(ranking));
+        localStorage.setItem('rankings', JSON.stringify(ranking));
+
+        loadRanks();
+    } else {console.log("score is 0 score wont be pushed");}
 }
+
+loadRanks();
