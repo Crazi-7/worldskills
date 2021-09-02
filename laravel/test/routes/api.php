@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Staff;
-use App\Http\Controllers\StaffController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,13 +14,6 @@ use App\Http\Controllers\StaffController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
-
-Route::post('/staff', 'StaffController@store');
-Route::get('/staff', 'StaffController@index');
-
-Route::post('/staff', [StaffController::class, 'store']);

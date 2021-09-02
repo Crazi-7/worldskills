@@ -17,7 +17,7 @@ class StaffController extends Controller
             "full_name" => $full_name,
             "photo" => $photo
         ]);
-
+        
         $id = $staff->id;
         
         return response()->json(
