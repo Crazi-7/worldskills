@@ -10,10 +10,14 @@ class Order extends Model
     use HasFactory;
     protected $table = 'orders';
     protected $primaryKey = 'id';
-    
-    protected $fillable = ['date', 'cid', 'value', 'home', 'address'];
+    public $timestamps = false;
+    protected $fillable = ['pickup', 'cid', 'value', 'home', 'address'];
     
     public function products() {
         return $this->belongsToMany(Product::class, 'order-product', 'oid', 'pid');
+    }
+
+    public function customers() {
+        return $this->belongsTo(Customer::class, 'cid');
     }
 }
