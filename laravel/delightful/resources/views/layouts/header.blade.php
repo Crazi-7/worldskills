@@ -36,7 +36,7 @@
                 <li class="{{request()->is('orders') ? 'active' : ''}}"><a href="orders.html">Orders</a></li>
                 <li><a href="historic.html">Historic</a></li>
                 <ul class="nav  navbar-right">
-                    <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
                 </ul> 
             </ul>            
 

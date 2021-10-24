@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -21,11 +20,25 @@
     <link href="../dist/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 
-
+@if(isset(Auth::user()->email))
+<script>window.location="/order" </script>
+@endif
 <body>
 
     <div class="container">
         <div class="row">
+            @if($message = Session::get('error'))
+            <div><h1>{{$message}}</h1> </div>
+            @endif
+
+            @if ($errors -> any())
+            <div class="error">
+                @foreach ($errors->all as $error)
+
+              <li>  {{$error}} </li>
+              @endforeach
+            </div>
+            @endif
             <div class="col-md-4 col-md-offset-4"> 
                 <img style="width:149px;margin:20% auto 0 auto;display:block;" src="../dist/img/logo.jpg" title="Logo" />
                 <div class="login-panel panel panel-default">
@@ -33,7 +46,7 @@
                         <h3 class="panel-title">Login</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form">
+                        <form role="form" method="post" action=""> @csrf
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
@@ -41,7 +54,7 @@
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="password" type="password" value="">
                                 </div>
-                                <a href="#" class="btn btn-lg btn-success btn-block">Login</a>
+                                <input type="submit" value="Login" class="btn btn-lg btn-success btn-block">
                             </fieldset>
                         </form>
                     </div>
@@ -62,3 +75,5 @@
 </body>
 
 </html>
+
+
