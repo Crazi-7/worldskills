@@ -18,7 +18,7 @@ class LoginController extends Controller
 
         if(Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/order');
+            return redirect()->intended('/place-order');
         }
         
         return back()->with('error', 'Email or password not correct' );

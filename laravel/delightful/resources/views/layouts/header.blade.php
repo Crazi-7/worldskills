@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Delightful Admin</title>
+    <title>Delightful</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{URL('dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -28,13 +28,28 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">Delightful Admin</a>
+                <a class="navbar-brand" href="index.html">Delightful 
+                    @if (Auth::user()->isEmployee())
+                    Employee
+                    @else
+                    Customer
+                    @endif
+
+                </a>
             </div>
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links text-center">
-                <li class="{{request()->is('orders') ? 'active' : ''}}"><a href="orders.html">Orders</a></li>
-                <li><a href="historic.html">Historic</a></li>
+               
+
+                @if (Auth::user()->isEmployee())
+                <li class="{{request()->is('myorders') ? 'active' : ''}}"><a href="{{ route('orders') }}">Orders placed</a></li>
+                <li class="{{request()->is('taxfee') ? 'active' : ''}}"><a href="{{ route('taxfee') }}">Tax fee</a></li>
+                @else
+                <li class="{{request()->is('place-order') ? 'active' : ''}}"><a href="{{ route('place.order') }}">Orders</a></li>
+                <li class="{{request()->is('historic') ? 'active' : ''}}"><a href="{{ route('historic') }}">Historic</a></li>
+
+                @endif
                 <ul class="nav  navbar-right">
                     <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
                 </ul> 

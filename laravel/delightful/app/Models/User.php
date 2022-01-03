@@ -17,11 +17,15 @@ class User extends Authenticatable
      *
      * @var string[]
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+    protected $fillable = ['name', 'email', 'phone', 'password'];
+    public $timestamps = false;
+
+    // public function orders() {
+    //     return $this->hasMany(Order::class, 'cid', 'id');
+    // }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    public function isEmployee() 
+    {
+        return $this->type == "Employee";
+    }
 }

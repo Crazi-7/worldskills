@@ -17,9 +17,9 @@ class Customer extends Authenticatable
     protected $fillable = ['name', 'email', 'phone', 'password'];
     public $timestamps = false;
 
-    public function customers() {
-        return $this->hasMany(Customer::class, 'cid', 'id');
-    }
+    // public function customers() {
+    //     return $this->hasMany(Customer::class, 'cid', 'id');
+    // }
 
     
 }

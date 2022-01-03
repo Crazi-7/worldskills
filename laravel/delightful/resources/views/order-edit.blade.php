@@ -14,24 +14,8 @@
                     <p>Number: {{$order->id}}</p>
                     <p>Date: {{$order->date}}</p>
                     <p>Total Value: AED {{$order->value}}</p>
-                   @if (!Auth::user()->isEmployee()) 
-                    <div class="form-group ">
-                            <label>Status</label>
-                            
-                                {{$order->status}}
-                                                    
-                        </div>  
-                        
-                        <br />  
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="local" value="" checked disabled> Home delivery
-                                </label>
-                            </div>
-                        </div>                                                                        
-                    @else    
-                    <form role="form" class="form-inline" method="post"> 
+                    
+                    <form role="form" class="form-inline" method="post" action> 
                         @csrf
                         @method('put')
                         <div class="form-group ">
@@ -53,8 +37,7 @@
                                 </label>
                             </div>
                         </div>                                                                        
-                    </form> 
-                    @endif               
+                    </form>                    
                 </div>        
             </div>
             <!-- /.row -->       
@@ -65,7 +48,7 @@
                             <h3 class="panel-title">Delivery address</h3>
                         </div>                    
                         <div class="panel-body"> 
-                            Address: {{$order->address}}
+                            Address: Lorem Ipsum St, 1234, Neighborhood, City
                         </div>
                         <!-- /.panel-body -->
                     </div>
@@ -88,14 +71,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if($products)
-                                            @foreach ($products as $product)
-                                            <tr>
-                                                <td>{{$product->name}}</td>
-                                                <td>AED {{$product->price}}</td>
-                                            </tr>
-                                            @endforeach
-                                          @endif
+                                        <tr>
+                                            <td>French Fries</td>
+                                            <td>AED 1.50</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Steak</td>
+                                            <td>AED 4.00</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -110,8 +93,8 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
-                    <p class="col-md-12">Delivery fee: AED {{$fee}}</p>                
-                    <p class="col-md-12">Total order amount: AED {{$order->value+$fee}}</p>                    
+                    <p class="col-md-12">Delivery fee: AED 5.00</p>                
+                    <p class="col-md-12">Total order amount: AED 10.50</p>                    
                 </div>                 
             </div>
             <!-- /.row -->

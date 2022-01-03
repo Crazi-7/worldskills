@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Config;
 use Illuminate\Http\Request;
 use App\models\Order;
 use App\Models\order_product;
 use App\models\Product;
 use App\models\Customer;
+use Illuminate\Support\Facades\Auth;
 
 class OrdersController extends Controller
 {
@@ -18,18 +20,17 @@ class OrdersController extends Controller
     public function index()
     {
         
-         $orders = Order::all();
-         dd($orders);
+        $orders = Order::with('user')->get();
         return view('orders-placed')->with('orders', $orders);    
     }
 
 
-    public function order()
+    public function place_order()
     {
         //$orders = Order::all();
-         $products = Product::all();
-        
-        return view('order')->with('products', $products);    
+        $products = Product::all();
+
+        return view('order')->with(compact('products'));    
     }
 
     /**
@@ -41,13 +42,15 @@ class OrdersController extends Controller
     {
         //
     }
-
+   
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {                
         // $request -> validate([
@@ -59,19 +62,21 @@ class OrdersController extends Controller
         //     'number' => 'required',
         //     'city' => 'required',
 
-        // ]);
+        // ]);        
+        
         $newaddress = $request->address . ', ' . $request->number . ', ' . $request->city;
         
         $order = new Order;
         $order->home = $request->local;
         $order->address = $newaddress;
         $order->pickup = $request->time;
-        $order->cid = 1; //placerholder
-        $order->value = 50.0; //placeholder        
+        $order->cid = Auth::id();  
+        $order->value = 0.0; //placeholder      
         $order->save();
+        
         $i=0;
-
-
+        $totalPrice = 0;
+        
         foreach ($request->quantity as $qtt)
         {
             if (isset($qtt)) {
@@ -79,11 +84,25 @@ class OrdersController extends Controller
                 $op->oid = $order->id;
                 $op->qtt = $qtt;
                 $op->pid = $request->product[$i];
+                $totalPrice += $qtt * $this->getPriceById($request->product[$i]);
                 $i++;
                 $op->save();
-        }}
-        return redirect('/orders');
+            }
+
+        }        
+
+        Order::where('id', $order->id)->update(['value' => $totalPrice]);
+
+        return redirect('/historic');
     }
+
+    private function getPriceById($id)
+    {
+        return Product::find($id)->price;
+    }
+
+
+
 
     /**
      * Display the specified resource.
@@ -91,11 +110,24 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function history()
     {
-        //
+        $orders = Order::all()->where('cid', Auth::id());        
+        
+        return view('historic')->with(compact('orders'));          
     }
 
+
+
+
+    public function show($id)
+    {
+        $order = Order::with('products')->find($id);
+        $products = $order->products;
+        $fee = Config::find(1)->tax;
+        return view('order-details')->with(compact('order', 'products', 'fee'));
+         
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -115,8 +147,9 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //
+    {                        
+        Order::where('id', $id)->update(['status' => $request->status]);
+        return redirect()->back();
     }
 
     /**

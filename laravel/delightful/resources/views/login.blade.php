@@ -20,9 +20,9 @@
     <link href="../dist/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 
-@if(isset(Auth::user()->email))
+<!-- @if(isset(Auth::user()->email))
 <script>window.location="/order" </script>
-@endif
+@endif -->
 <body>
 
     <div class="container">

@@ -14,9 +14,13 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', [LoginController::class, 'index']);
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout']);
-Route::get('/order', [OrdersController::class, 'order']);
+Route::get('/place-order', [OrdersController::class, 'place_order'])->name('place.order');
 Route::post('/orders/store', [OrdersController::class, 'store'])->name('order.store');
-Route::get('/orders', [OrdersController::class, 'index']);
+Route::get('/orders', [OrdersController::class, 'index'])->middleware(['auth'])->name('orders');
+Route::get('/order/{id}', [OrdersController::class, 'show']);
+Route::put('/order/{id}', [OrdersController::class, 'update']);
+Route::get('/historic', [OrdersController::class, 'history'])->name('historic');;
+Route::get('/tax', [OrdersController::class, 'tax'])->name('taxfee');;

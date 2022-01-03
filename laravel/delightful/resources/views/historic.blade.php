@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+</div>
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -25,41 +26,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach ($orders as $order)
                                         <tr>
-                                            <td>0001</td>
-                                            <td>00/00/0000</td>
-                                            <td>AED 100.00</td>
-                                            <td>Approved</td>
-                                            <td><a href="#">See Details</a></td>
+                                            <td>{{$order->id}}</td>
+                                            <td>{{$order->date}}</td>
+                                            <td>AED {{$order->value}}</td>
+                                            <td>{{$order->status}}</td>
+                                            <td><a href="order/{{$order->id}}">See Details</a></td>
                                         </tr>
-                                        <tr>
-                                            <td>0002</td>
-                                            <td>00/00/0000</td>
-                                            <td>AED 100.00</td>
-                                            <td>Approved</td>
-                                            <td><a href="#">See Details</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>0003</td>
-                                            <td>00/00/0000</td>
-                                            <td>AED 100.00</td>
-                                            <td>In production</td>
-                                            <td><a href="#">See Details</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>0004</td>
-                                            <td>00/00/0000</td>
-                                            <td>AED 100.00</td>
-                                            <td>In production</td>
-                                            <td><a href="#">See Details</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td>0005</td>
-                                            <td>00/00/0000</td>
-                                            <td>AED 100.00</td>
-                                            <td>Finalized</td>
-                                            <td><a href="#">See Details</a></td>
-                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -91,3 +66,4 @@
 </body>
 
 </html>
+@endsection
