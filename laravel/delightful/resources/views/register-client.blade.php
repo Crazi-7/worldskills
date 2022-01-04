@@ -14,32 +14,39 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form">
+                                    <form role="form" method="post"> @csrf
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input class="form-control" placeholder="Type your name">
+                                            <input class="form-control" placeholder="Type your name" name="name">
                                         </div>
                                         <div class="form-group">
                                             <label>E-mail</label>
                                             <input class="form-control" placeholder="Type your email" name="email" type="text">
                                         </div>
+                                        @if (!(Auth::check() && Auth::user()->isEmployee()))
                                         <div class="form-group">
                                             <label>Phone</label>
                                             <input class="form-control" placeholder="Type your mobile phone" name="tel" type="text">
-                                        </div>                                
+                                        </div>
+                                        @endif                                
                                         <div class="form-group">
                                             <label>Password</label>
                                             <input class="form-control" placeholder="Type your password" name="password" type="password" value="">
                                         </div>                                                                                                               
                                         <button type="submit" class="btn btn-primary pull-right">Register</button>                                        
                                     </form>
+                                    
                                 </div>
                                 <!-- /.col-lg-12 (nested) -->
                             </div>
+                            
                             <!-- /.row (nested) -->
                         </div>
                         <!-- /.panel-body -->
                     </div>
+                    @if (!(Auth::check() && Auth::user()->isEmployee()))
+                        <p>Already a memeber? <a href="{{route('login');}}">Login </a> </p>
+                    @endif
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->

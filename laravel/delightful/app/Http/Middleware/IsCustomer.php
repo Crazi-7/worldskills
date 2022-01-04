@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class IsEmployee
+class IsCustomer
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,11 @@ class IsEmployee
      * @return mixed
      */
     public function handle(Request $request, Closure $next)
-    {                                
-        if (!Auth::user()->isEmployee()) {
-            return redirect('/');
+    {
+        if (!Auth::user()->type == "customer")
+        {
+            
         }
-        
         return $next($request);
     }
 }

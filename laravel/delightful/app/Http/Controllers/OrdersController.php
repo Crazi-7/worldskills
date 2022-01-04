@@ -17,12 +17,21 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        
-        $orders = Order::with('user')->get();
-        return view('orders-placed')->with('orders', $orders);    
+        $status = $request->input('filter');        
+        $fee = Config::find(1)->tax;
+        $orders = Order::with('user');
+
+        if($status) {
+            $orders->where('status', $status);
+        }
+
+        $orders = $orders->get();
+
+        return view('orders-placed')->with(compact('orders', 'fee'));
     }
+
 
 
     public function place_order()
@@ -53,23 +62,23 @@ class OrdersController extends Controller
 
     public function store(Request $request)
     {                
-        // $request -> validate([
+        $request -> validate([
 
-        //     'product[]' => 'required',
-        //     'local' => '',
-        //     'pickup' => 'required',            
-        //     'address' => '',            
-        //     'number' => 'required',
-        //     'city' => 'required',
+            'product[]' => 'required',
+            'local' => '',
+            'pickup' => 'required',            
+            'address' => '',            
+            'number' => 'required',
+            'city' => 'required',
 
-        // ]);        
+        ]);        
         
         $newaddress = $request->address . ', ' . $request->number . ', ' . $request->city;
         
         $order = new Order;
         $order->home = $request->local;
         $order->address = $newaddress;
-        $order->pickup = $request->time;
+        $order->pickup = $request->time;        
         $order->cid = Auth::id();  
         $order->value = 0.0; //placeholder      
         $order->save();
@@ -101,24 +110,12 @@ class OrdersController extends Controller
         return Product::find($id)->price;
     }
 
-
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function history()
     {
         $orders = Order::all()->where('cid', Auth::id());        
         
         return view('historic')->with(compact('orders'));          
     }
-
-
-
 
     public function show($id)
     {
@@ -128,29 +125,33 @@ class OrdersController extends Controller
         return view('order-details')->with(compact('order', 'products', 'fee'));
          
     }
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {                        
         Order::where('id', $id)->update(['status' => $request->status]);
         return redirect()->back();
     }
+
+    public function tax() 
+    {
+        $fee = Config::find(1)->tax;
+        return view('tax-fee')->with(compact('fee'));
+
+    }
+
+    public function newTax(Request $request) {
+        $valid = $request->validate([
+            'fee' => 'required|int'
+        ]);
+        Config::where('id', 1)->update(['tax' => $request->fee]);
+        return redirect()->back();
+    }
+
 
     /**
      * Remove the specified resource from storage.

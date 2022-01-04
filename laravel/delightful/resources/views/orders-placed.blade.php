@@ -14,16 +14,18 @@
                     <div class="panel-default">
                         <div class="panel-body">
                             <div class="row">
-                                <form role="form" class="form-inline">                       
+                                <form role="form" class="form-inline" action="{{ route('orders') }}" method="GET">
+                                    @csrf                  
                                     <div class="form-group">
                                         <label>Filter by: </label>
-                                        <select class="form-control">
-                                            <option>Select status</option>
-                                            <option value="approved">Approved</option>
-                                            <option value="disapproved">Disapproved</option>
-                                            <option value="production">In production</option>
-                                            <option value="delivery">Out for delivery</option>
-                                            <option value="finished">Finished</option>                                             
+                                        <select class="form-control" name="filter">
+                                            <option value="">Select status</option>
+                                            <option value="Awaiting Approval">Awaiting Approval</option>
+                                            <option value="Approved">Approved</option>
+                                            <option value="Disapproved">Disapproved</option>
+                                            <option value="In production">In production</option>
+                                            <option value="Out for Delivery">Out for delivery</option>
+                                            <option value="Finished">Finished</option>                                             
                                         </select>
                                     </div>                                                                                                               
                                     <button type="submit" class="btn btn-primary">OK</button>                                        
@@ -61,7 +63,7 @@
                                             <td>{{$order->id}}</td>
                                             <td>{{$order->date}}</td>
                                             <td>{{$order->user->name}}</td>
-                                            <td>AED {{$order->value}}</td>
+                                            <td>AED {{$order->value+$fee}}</td>
                                             <td>{{$order->status}}</td>
                                             <td><a href="order/{{$order->id}}">See Details</a></td>
                                         </tr>

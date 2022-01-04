@@ -24,36 +24,39 @@
 <body>
 
     <div id="wrapper">
+        @if (Auth::check())
+            
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">Delightful 
+                        @if (Auth::user()->isEmployee())
+                        Employee
+                        @else
+                        Customer
+                        @endif
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="index.html">Delightful 
+                    </a>
+                </div>
+                <!-- /.navbar-header -->
+
+                <ul class="nav navbar-top-links text-center">
+                
+
                     @if (Auth::user()->isEmployee())
-                    Employee
+                    <li class="{{request()->is('orders') ? 'active' : ''}}"><a href="{{ route('orders') }}">Orders placed</a></li>
+                    <li class="{{request()->is('tax') ? 'active' : ''}}"><a href="{{ route('taxfee') }}">Tax fee</a></li>
+                    <li class="{{request()->is('register') ? 'active' : ''}}"><a href="{{ route('register') }}">Register an employee</a></li>
                     @else
-                    Customer
+                    <li class="{{request()->is('place-order') ? 'active' : ''}}"><a href="{{ route('place.order') }}">Orders</a></li>
+                    <li class="{{request()->is('historic') ? 'active' : ''}}"><a href="{{ route('historic') }}">Historic</a></li>
+
                     @endif
+                    <ul class="nav  navbar-right">
+                        <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+                    </ul> 
+                </ul>            
 
-                </a>
-            </div>
-            <!-- /.navbar-header -->
-
-            <ul class="nav navbar-top-links text-center">
-               
-
-                @if (Auth::user()->isEmployee())
-                <li class="{{request()->is('myorders') ? 'active' : ''}}"><a href="{{ route('orders') }}">Orders placed</a></li>
-                <li class="{{request()->is('taxfee') ? 'active' : ''}}"><a href="{{ route('taxfee') }}">Tax fee</a></li>
-                @else
-                <li class="{{request()->is('place-order') ? 'active' : ''}}"><a href="{{ route('place.order') }}">Orders</a></li>
-                <li class="{{request()->is('historic') ? 'active' : ''}}"><a href="{{ route('historic') }}">Historic</a></li>
-
-                @endif
-                <ul class="nav  navbar-right">
-                    <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
-                </ul> 
-            </ul>            
-
-            <!-- /.navbar-top-links -->
-        </nav>
+                <!-- /.navbar-top-links -->
+            </nav>
+        @endif
