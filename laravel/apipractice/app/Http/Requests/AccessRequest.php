@@ -17,7 +17,7 @@ class AccessRequest extends ApiRequest
     {
         return [
             'staff' => 'required|exists:staff,code',
-            'point_id' => 'required|exists:points,id' 
+            'point' => 'required|exists:points,id' 
         ];
     }
 }

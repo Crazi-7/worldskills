@@ -20,7 +20,7 @@ class Staff extends Model
 
     public function groups() 
     {
-        return $this->belongsToMany(Groups::class);
+        return $this->belongsToMany(Groups::class, 'group_staff', 'staff_id', 'group_id');
     }
 
     public function access()
