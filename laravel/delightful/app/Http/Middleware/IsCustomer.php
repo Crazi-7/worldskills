@@ -19,7 +19,7 @@ class IsCustomer
     {
         if (!Auth::user()->type == "customer")
         {
-            
+            return redirect('/');
         }
         return $next($request);
     }
