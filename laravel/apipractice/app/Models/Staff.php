@@ -25,6 +25,11 @@ class Staff extends Model
 
     public function access()
     {
-        return $this->hasMany(StaffAccess::class, 'staff_id');
+        return $this->hasMany(Access::class, 'staff_id');
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(Logs::class, 'staff_id');
     }
 }

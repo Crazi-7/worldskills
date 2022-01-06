@@ -19,6 +19,6 @@ class ApiRequest extends FormRequest
                 "message" => "Validation error",
                 "errors" => $validator->errors() 
             ]
-        ]), 422);
+        ], 422));
     }
 }

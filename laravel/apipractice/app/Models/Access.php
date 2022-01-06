@@ -10,7 +10,10 @@ class Access extends Model
     use HasFactory;
     protected $table = 'staff_accesses';
     
-    public $timestamps = false;
+    // public $timestamps = false;
+
+    const UPDATED_AT = null;
+
     protected $fillable = [
         'staff_id',
         'point_id',

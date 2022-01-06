@@ -24,6 +24,6 @@ class Groups extends Model
 
     public function staff() 
     {
-        return $this->belongsToMany(Staff::class);
+        return $this->belongsToMany(Staff::class, 'group_staff', 'group_id', 'staff_id');
     }
 }

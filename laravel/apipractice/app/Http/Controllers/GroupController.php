@@ -47,7 +47,7 @@ class GroupController extends Controller
         $group = Groups::find($id);
         foreach ($request->staff as $staff) 
         {
-            $group->points()->attach($staff);
+            $group->staff()->attach($staff);
         }
         return response("", 201);
     }

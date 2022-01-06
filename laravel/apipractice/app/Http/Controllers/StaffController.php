@@ -55,7 +55,7 @@ class StaffController extends Controller
             'data' => [
                 'items' => StaffResource::collection(Staff::all())
             ]
-        ], 201);
+        ], 200);
     }
 
     public function giveAccess($id, AddRequest $request)

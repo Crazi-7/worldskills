@@ -12,13 +12,16 @@ class Logs extends Model
     protected $table = 'Logs';
     protected $primaryKey = 'id';
     // public $timestamps = false;
+    const UPDATED_AT = null;
+
     protected $fillable = [
         'staff_id',
         'point_id',
         'camera',
         'access',
     ];
-    protected $dateFormat = 'U';
+    
+    // protected $dateFormat = 'U';
 
     public function points() 
     {

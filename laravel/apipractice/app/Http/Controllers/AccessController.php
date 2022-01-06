@@ -10,6 +10,7 @@ use App\Models\Logs;
 use App\Models\Points;
 use App\Models\Staff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class AccessController extends Controller
 {
@@ -20,49 +21,67 @@ class AccessController extends Controller
         $staff = Staff::with('groups')->where('code', $request->staff)->first();
         $points = $staff->groups->map->points->flatten();
 
-
-        $collection = collect($points->map->id);
-        $collection = $collection->unique();
-
+        $collection = collect($points->map->id)->unique();
+        // $collection = $collection->unique();
+        
         foreach ($collection as $item) {
             
             $parent = Points::where('id', $item)->first()->parent;
            
             if (!$collection->contains($parent) && !is_null($parent))
             {
+                
                 $collection->push($parent);  
             }
-        }
-        
+        }               
 
-       if ($collection->contains($request->point)) 
-       {
-        $access = true;
-       }
-
-       $staffaccess = Access::where('staff_id', '=', $staff->id)->where('point_id', '=', $request->point)->first();
+        // $staffAccess = $staff->access()->where('point_id', $request->point)->first();
        
-       if ($staffaccess)
-       {
-        $access = true;
-       }
-      
+        // if ($staffAccess) {
+        //     $time = $staffAccess->time;
+        //     $createdAt = $staffAccess->created_at;
+ 
+        //     dump(now());
+        //     dump($createdAt->addSeconds($time));        
+        //     $access = $createdAt > now()->subSeconds($time);         
+        // }        
 
-       return response()->json([
-        'data' => 
-        [
-            'photo' => 'photooo',
-            'accesss' => $access
-        ]
-    ], 200);
+        $staffAccess = $staff->access()->where('point_id', $request->point)->get();
 
+        $filteredAccess = $staffAccess->filter(function($access) {
+            return $access->created_at > now()->subSeconds($access->time);
+        });
+        
+        $collection->push($filteredAccess->flatten()[0]->point_id);        
+    
+        if ($collection->contains($request->point)) {
+            $access = true;        
+        }     
+       
 
+        // External API access
+        //    Http::post();
+        
+        /*
+        * add access log        
+        */
 
-
-
+        Logs::create([
+            'staff_id' => $staff->id,
+            'point_id' => $request->point,
+            'camera' => 'photoo',
+            'access' => $access,
+        ]);
+        
+        return response()->json([
+            'data' => [
+                'photo' => 'photooo',
+                'accesss' => $access
+            ]
+        ], 200);
     }
 
-    Public function logs(LogsRequest $request) 
+    public function logs(LogsRequest $request) 
     {
         if (!$request->has('type'))
         {
