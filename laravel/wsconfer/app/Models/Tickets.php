@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,5 +19,22 @@ class Tickets extends Model
     ];
     public $timestamps = false;
 
-  
+    public function getSpecialValidityAttribute($value)
+    {        
+        if(is_null($value)) {
+            return '';
+        }
+
+        $arr = json_decode($value, true);
+
+        $type = $arr['type'];
+        
+
+        $specialValidity = match($type) {
+            'date' => 'Available until ' . Carbon::parse($arr['date'])->format('F d, Y'),
+            'amount' => $arr['amount'] . " tickets available"
+        };        
+        
+        return $specialValidity;
+    }
 }

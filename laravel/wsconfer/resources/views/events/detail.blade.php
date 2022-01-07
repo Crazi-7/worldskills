@@ -57,11 +57,8 @@
                     <div class="card mb-4 shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title">{{$ticket->name}}</h5>
-                            <p class="card-text">{{$ticket->cost}}</p>
-                            @if (!is_null($ticket->special_validity))   
-                                {{dd($ticket->special_validity)}}
-                                <p class="card-text">{{ json_decode($ticket->special_validity, true); }}</p> 
-                            @endif
+                            <p class="card-text">{{$ticket->cost}}</p>                            
+                            <p class="card-text">{{ $ticket->special_validity }}</p>
                         </div>
                         
                     </div>
