@@ -17,12 +17,26 @@ class AccessController extends Controller
     public function hasPerms(AccessRequest $request) 
     {
         $access = false;
+        $staff = Staff::where(function ($staff) use ($request) {
+            $staff->where('code', $request->staff);
+        })->whereHas('groups', function ($group) {
+            $group->whereHas('points');
+        })->with([
+            'groups' => function ($group) {
+                $group->with([
+                    'points' => function ($point) {
+                        $point->whereNotNull('parent');
+                    }
+                ]);
+            }
+        ])->first();
+        
+        dump($staff);
+       $staff = Staff::with('groups')->where('code', $request->staff)->first();
+       $points = $staff->groups->map->points->flatten();
 
-        $staff = Staff::with('groups')->where('code', $request->staff)->first();
-        $points = $staff->groups->map->points->flatten();
-
-        $collection = collect($points->map->id)->unique();
-        // $collection = $collection->unique();
+       $collection = collect($points->map->id)->unique();
+        $collection = $collection->unique();
         
         foreach ($collection as $item) {
             
@@ -33,7 +47,9 @@ class AccessController extends Controller
                 
                 $collection->push($parent);  
             }
-        }               
+        }           
+        
+        dd($collection);
 
         // $staffAccess = $staff->access()->where('point_id', $request->point)->first();
        
