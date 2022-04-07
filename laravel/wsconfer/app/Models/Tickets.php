@@ -19,13 +19,44 @@ class Tickets extends Model
     ];
     public $timestamps = false;
 
-    public function getSpecialValidityAttribute($value)
+    
+
+    public function apiv()
     {        
-        if(is_null($value)) {
-            return '';
+        
+        if(!$this->special_validity) {
+            return true;
         }
 
-        $arr = json_decode($value, true);
+        $arr = json_decode($this->special_validity, true);
+
+        $type = $arr['type'];
+        if ($type == 'date')
+        {
+            return $arr['date'] > now();
+        }
+        else 
+        {
+            return $arr['amount'] > 0;
+        }
+
+       
+    }
+
+    // public function getSpecialValidityAttribute($value)
+    // {   
+    public function specialval()
+    {        
+        // if(is_null($value)) {
+        //     return '';
+        // }
+
+        // $arr = json_decode($value, true);
+        if(!$this->special_validity) {
+            return true;
+        }
+
+        $arr = json_decode($this->special_validity, true);
 
         $type = $arr['type'];
         

@@ -26,15 +26,16 @@ class Sessions extends Model
         return $this->belongsTo(Rooms::class, 'room_id');
     }
 
-
-    
-    public function getStartAttribute($date)
-    {
-        return Carbon::parse($date)->format('H:i');
+    public function session_registrations() {
+        return $this->hasMany(Session_registrations::class, 'session_id', 'id');
     }
 
-    public function getEndAttribute($date)
-    {
-        return Carbon::parse($date)->format('H:i');
+    public function start() {
+        return Carbon::parse($this->start)->format('H:i');
     }
+
+    public function end() {
+        return Carbon::parse($this->end)->format('H:i');
+    }
+  
 }

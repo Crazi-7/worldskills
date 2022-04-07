@@ -12,38 +12,47 @@
                     <span>{{$event->name}}</span>
                 </h6>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link active" href="events/detail.html">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{route('showEvent', ['id' => $event->id])}}">Overview</a></li>
                 </ul>
 
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                     <span>Reports</span>
                 </h6>
                 <ul class="nav flex-column mb-2">
-                    <li class="nav-item"><a class="nav-link" href="reports/index.html">Room capacity</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('report', ['id' => $event->id])}}">Room capacity</a></li>
                 </ul>
             </div>
         </nav>
-
+        
+        
+        
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="border-bottom mb-3 pt-3 pb-2 event-title">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                     <h1 class="h2">{{$event->name}}</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="events/edit.html" class="btn btn-sm btn-outline-secondary">Edit event</a>
+                            <a href="{{route('editEvent', ['id' => $event->id])}}" class="btn btn-sm btn-outline-secondary">Edit event</a>
                         </div>
                     </div>
                 </div>
                 <span class="h6">{{$event->date}}</span>
             </div>
-
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{session('success')}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
             <!-- Tickets -->
             <div id="tickets" class="mb-3 pt-3 pb-2">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
                     <h2 class="h4">Tickets</h2>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="tickets/create.html" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{route('createTicket', ['id' => $event->id])}}" class="btn btn-sm btn-outline-secondary">
                                 Create new ticket
                             </a>
                         </div>
@@ -58,7 +67,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{$ticket->name}}</h5>
                             <p class="card-text">{{$ticket->cost}}</p>                            
-                            <p class="card-text">{{ $ticket->special_validity }}</p>
+                            <p class="card-text">{{ $ticket->specialval() }}</p>
                         </div>
                         
                     </div>
@@ -72,7 +81,7 @@
                     <h2 class="h4">Sessions</h2>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="sessions/create.html" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{route('createSession', ['id' => $event->id])}}" class="btn btn-sm btn-outline-secondary">
                                 Create new session
                             </a>
                         </div>
@@ -96,9 +105,9 @@
                         @foreach($event->rooms->map->sessions->flatten() as $session)
                     <tr>
                         
-                        <td class="text-nowrap">{{$session->start}}-{{$session->end}}</td>
+                        <td class="text-nowrap">{{$session->start()}}-{{$session->end()}}</td>
                         <td>{{ucfirst($session->type)}}</td>
-                        <td><a href="sessions/edit.html">{{$session->title}}</a></td>
+                        <td><a href="{{route('editSession', ['id' => $event->id, 'eid'=> $session->id])}}">{{$session->title}}</a></td>
                         <td class="text-nowrap">{{$session->speaker}}</td>
                         <td class="text-nowrap">{{$session->room->channel->name}} / {{$session->room->name}}</td>
                     </tr>
@@ -114,7 +123,7 @@
                     <h2 class="h4">Channels</h2>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="channels/create.html" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{route('createChannel', ['id' => $event->id])}}" class="btn btn-sm btn-outline-secondary">
                                 Create new channel
                             </a>
                         </div>
@@ -142,7 +151,7 @@
                     <h2 class="h4">Rooms</h2>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
-                            <a href="rooms/create.html" class="btn btn-sm btn-outline-secondary">
+                            <a href="{{route('createRoom', ['id' => $event->id])}}" class="btn btn-sm btn-outline-secondary">
                                 Create new room
                             </a>
                         </div>

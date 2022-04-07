@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -33,7 +34,11 @@ class Events extends Model
         return $this->hasManyThrough(Rooms::class, Channels::class, 'event_id', 'channel_id');
     }
 
-    public function sessions() {
+    public function organizers() {
+        return $this->belongsTo(Organizer::class, 'organizer_id');
+    }
 
+    public function date() {
+        return Carbon::parse($this->date)->format('F d, Y');
     }
 }

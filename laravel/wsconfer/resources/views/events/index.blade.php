@@ -36,7 +36,7 @@
                         <a href="event/{{$event->id}}" class="btn text-left event">
                             <div class="card-body">
                                 <h5 class="card-title">{{$event->name}}</h5>
-                                <p class="card-subtitle">{{$event->date}}</p>
+                                <p class="card-subtitle">{{$event->date()}}</p>
                                 <hr>
                                 <p class="card-text">{{$event->registrations->count()}}</p>
                             </div>

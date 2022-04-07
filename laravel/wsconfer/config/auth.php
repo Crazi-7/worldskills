@@ -40,6 +40,18 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'attendees',
+            'input_key' => 'token',   // The input name to pass through
+            'storage_key' => 'login_token', // The column name to store in database
+        ],
+        'apisession' => [
+             'driver' => 'session',
+             'provider' => 'attendees',
+          
+         ],
+
     ],
 
     /*
@@ -64,6 +76,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Organizer::class,
         ],
+        'attendees' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Attendees::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
